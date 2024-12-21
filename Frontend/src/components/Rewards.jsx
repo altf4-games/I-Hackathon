@@ -63,10 +63,13 @@ function Rewards() {
           {RewardsData.map((reward, index) => (
             <div
               key={index}
-              className="grid grid-cols-2 bg-gray-900 text-white overflow-hidden rounded-[28px] p-6 shadow-lg"
+              className="flex w-full bg-gray-900 text-white overflow-hidden rounded-[28px] p-6 shadow-lg"
             >
               <div className="relative w-full">
-                <div className="relative z-10 mb-6 text-2xl font-bold">{reward.name}</div>
+                <div className="flex justify-between w-full">
+                  <div className="relative z-10 mb-6 text-2xl font-bold">{reward.name}</div>
+                  <div className="relative z-10 mb-6 text-2xl font-bold">Required: {reward.points} points</div>
+                </div>
                 <div className="relative flex gap-2 justify-start items-center z-10 text-lg mb-6">{reward.description}</div>
                 <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Claim Rewards</button>
               </div>
