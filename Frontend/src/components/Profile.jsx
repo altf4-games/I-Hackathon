@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { PayEmbed } from "thirdweb/react";
+import { client } from "../client";
 
 function UserProfile() {
   const [profile, setProfile] = useState({
@@ -13,6 +15,7 @@ function UserProfile() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ ...profile });
   const [imagePreview, setImagePreview] = useState(profile.image);
+  const [showPayEmbed, setShowPayEmbed] = useState(false);
 
   const handleEditClick = () => {
     setFormData({ ...profile });
@@ -75,6 +78,25 @@ function UserProfile() {
             </div>
           </div>
         </div>
+
+        {/* Buy ETH with Fiat Button */}
+        <div className="text-center">
+          <button
+            onClick={() => setShowPayEmbed(!showPayEmbed)}
+            className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
+          >
+            {showPayEmbed ? "Hide Buy ETH with Fiat" : "Buy ETH with Fiat"}
+          </button>
+        </div>
+
+        {showPayEmbed && (
+          <div className="flex flex-col justify-center items-center  bg-gray-800/80 text-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl mx-auto space-y-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/50 mt-10">
+            <h3 className="text-3xl font-extrabold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 animate-fade-in">
+              Buy ETH with Fiat
+            </h3>
+            <PayEmbed client={client}/>
+          </div>
+        )}
 
         {/* Edit Profile Button */}
         <div className="text-center">
