@@ -10,4 +10,5 @@ body{
     background-image:  radial-gradient(#444df749 2px, transparent 2px), radial-gradient(#444cf7 0.5px, black 0.5px);
     background-size: 50px 50px;
     background-position: 0 0,10px 10px;
+    scroll-behavior: auto;
 }

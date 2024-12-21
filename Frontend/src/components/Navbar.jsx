@@ -56,11 +56,13 @@ function Navbar() {
                   className="relative"
                   whileHover={{ scale: 1.1 }}
                 >
+                  <a href={`#${link}`}>
                   <div
                     className="text-white font-mono text-lg border-b-2 border-transparent hover:border-cyan-400 transition-all duration-300 ease-in-out cursor-pointer"
                   >
                     {link}
                   </div>
+                  </a>
                 </motion.div>
               ))}
             </div>

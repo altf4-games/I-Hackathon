@@ -4,7 +4,7 @@ import FaqsData from '../data/FaqsData';
 function Faqs() {
   return (
     <>
-    <h1 className="text-6xl font-bold text-center pt-8">FAQs</h1>
+    <h1 className="text-6xl font-bold text-center pt-8" id="FAQ">FAQs</h1>
     <div className="max-w-4xl mx-auto py-12 px-4">
       {FaqsData.map((faq, index) => (
         <div

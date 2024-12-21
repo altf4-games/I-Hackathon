@@ -20,7 +20,7 @@ function HowItWorks() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-indigo-800 rounded-2xl overflow-hidden">
+    <div className="w-full h-full bg-indigo-800 rounded-2xl overflow-hidden" id="How it Works?">
       <section className="p-8 md:p-16 mb-6">
         <h3 className="text-xl md:text-2xl mb-4 md:mb-8 text-white">
           How It Works?
