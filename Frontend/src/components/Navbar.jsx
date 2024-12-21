@@ -94,7 +94,7 @@ function Navbar() {
           animate={{ x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {["Home", "Consultation", "Projects", "About Us"].map((link) => (
+          {["Home", "How it Works?", "Features", "Traveler Stories", "FAQ"].map((link) => (
             <div
               key={link}
               onClick={() => {
