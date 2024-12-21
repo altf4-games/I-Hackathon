@@ -7,7 +7,7 @@ const Footer = () => {
 
       <div className="container mx-auto text-center">
         <p className="text-xl text-gray-300 mb-4">
-          © 2024 Your Company Name
+          © 2024 Team DontCare
         </p>
 
         <div className="space-x-6 mb-6">
