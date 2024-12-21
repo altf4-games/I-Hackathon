@@ -23,17 +23,40 @@ export default function App() {
             <HowItWorks />
             <Features />
             <FAQ />
+            <Footer />
           </>
         } />
-        <Route path="/dashboard" element={<h1>Dashboard</h1>} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/booking" element={<Booking />} />
+        <Route path="/dashboard" element={
+          <>
+            <h1>Dashboard</h1>
+            <Footer />
+            </>
+          } />
+        <Route path="/profile" element={
+          <>
+            <UserProfile />
+            <Footer />
+          </>} />
+        <Route path="/booking" element={<>
+            <Booking />
+            <Footer />
+          </>} />
         <Route path="/marketplace" element={<MarketPlace />} />
-        <Route path="/community" element={<Community />} />
+        <Route path="/community" element={
+          <>
+          <Community />
+          <Footer />
+          </>
+        } />
         <Route path="/rewards" element={<Rewards />} />
-        <Route path="*" element={<h1>Not Found</h1>} />
+        <Route path="*" element={
+          <>
+          <h1>Not Found</h1>
+          <Footer />
+          </>
+        } />
       </Routes>
-      <Footer />
+      
     </BrowserRouter>
   )
 }
