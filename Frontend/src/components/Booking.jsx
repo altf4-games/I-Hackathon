@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FlightBookingPage = () => {
+const Booking = () => {
     return (
         <>
             <div className="min-h-screen text-white font-sans relative py-20 text-center overflow-hidden">
@@ -103,4 +103,4 @@ const FlightBookingPage = () => {
     );
 };
 
-export default FlightBookingPage;
+export default Booking;
