@@ -5,6 +5,7 @@ import RewardPage from './pages/RewardPage'
 import ProfilePage from './pages/ProfilePage'
 import MarketPlacePage from './pages/MarketPlacePage'
 import CommunityPage from './pages/CommunityPage'
+import FlightBookingPage from './pages/FlightBookingPage'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/marketplace" element={<MarketPlacePage />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/rewards" element={<RewardPage />} />
+        <Route path="/book" element={<FlightBookingPage />} />
 
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
