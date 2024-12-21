@@ -33,7 +33,7 @@ function Navbar() {
         {
           isWalletConnected ? (
             <div className="hidden md:flex space-x-10 items-center">
-              {["Booking", "MarketPlace", "Rewards", "Community"].map((link) => (
+              {["Booking", "MarketPlace", "Rewards", "Community", "Profile"].map((link) => (
                 <motion.div
                   key={link}
                   className="relative"
@@ -57,7 +57,6 @@ function Navbar() {
                   whileHover={{ scale: 1.1 }}
                 >
                   <div
-                    onClick={() => navigate(link === "Home" ? "/" : `/${link.toLowerCase()}`)}
                     className="text-white font-mono text-lg border-b-2 border-transparent hover:border-cyan-400 transition-all duration-300 ease-in-out cursor-pointer"
                   >
                     {link}
