@@ -8,6 +8,7 @@ import { defineChain } from "thirdweb";
 import { useActiveAccount, useSendTransaction } from "thirdweb/react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Confetti from 'react-confetti';
 
 const tokenID = Math.floor(Math.random() * 10);
 const nft_contract = getContract({
@@ -28,6 +29,7 @@ function Rewards() {
   });
 
   const [nft, setNft] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(false);
   const { mutate: sendTransaction } = useSendTransaction();
   const account = useActiveAccount();
   const userAddress = account ? account.address : "";
@@ -70,9 +72,26 @@ function Rewards() {
     }
   };
 
+  const handlePop = () => {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 10000); // Confetti disappears after 5 seconds
+  };
+  
+  const element = document.getElementById("root");
+  let width = element.scrollWidth;
+  let height = element.scrollHeight;
+
   return (
     <div className="min-h-screen h-full w-full flex">
       <ToastContainer />
+      {showConfetti && (
+        <Confetti
+          width={width}
+          height= {height}
+          recycle={false}
+          tweenDuration={10000}
+        />
+      )}
 
       {/* Profile Card */}
       <div className="fixed top-16 left-0 max-w-[300px] w-full bg-indigo-900 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl p-8 space-y-6">
@@ -110,14 +129,7 @@ function Rewards() {
 
       {/* Rewards Section */}
       <div className="ml-[320px] w-full flex flex-col items-center mt-24">
-        <h1 className="text-6xl text-center font-bold w-full text-white">Claim Rewards</h1>
-        <div className="mt-8 w-full px-16">
-          <input
-            type="text"
-            placeholder="Search rewards..."
-            className="w-full px-4 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+        <h1 className="text-6xl text-center font-bold w-full text-white">Claim Reward</h1>
         <div className="flex flex-wrap items-start py-12 gap-6 w-full px-16">
           {RewardsData.map((reward, index) => (
             <div
@@ -130,7 +142,12 @@ function Rewards() {
                   <div className="relative z-10 mb-6 text-2xl font-bold">Required: {reward.points} points</div>
                 </div>
                 <div className="relative flex gap-2 justify-start items-center z-10 text-lg mb-6">{reward.description}</div>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Claim Rewards</button>
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                  onClick={handlePop}
+                >
+                  Claim Rewards
+                </button>
               </div>
             </div>
           ))}
