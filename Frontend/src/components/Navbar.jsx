@@ -92,14 +92,15 @@ function Navbar() {
         </div>
       </div>
 
-      {isMenuOpen && (
+      {/* {isMenuOpen && (
         <motion.div
-          className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-90 flex flex-col items-center justify-center space-y-6 text-white"
+          className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-100 flex flex-col items-center justify-center space-y-6 text-white"
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {["Home", "How it Works?", "Features", "Testimonials", "FAQ"].map((link) => (
+
+          {(isWalletConnected?(["Booking", "MarketPlace", "Rewards", "Community", "Profile"]):(["Home", "How it Works?", "Features", "Testimonials", "FAQ"])).map((link) => (
             <div
               key={link}
               onClick={() => {
@@ -113,7 +114,58 @@ function Navbar() {
           ))}
         </motion.div>
         
-      )}
+      )} */}
+      {isMenuOpen && (
+      <motion.div
+        className="md:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-100 flex flex-col items-center justify-center space-y-6 text-white"
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Close Menu Button */}
+        <button
+          onClick={toggleMenu}
+          className="absolute top-5 right-5 text-white bg-red-600 px-4 py-2 rounded-md text-lg hover:bg-red-700 transition-all duration-300"
+        >
+          X
+        </button>
+
+        {/* Navigation Links */}
+        {(isWalletConnected
+          ? ["Booking", "MarketPlace", "Rewards", "Community", "Profile"]
+          : ["Home", "How it Works?", "Features", "Testimonials", "FAQ"]
+        ).map((link) => (
+          <div
+            key={link}
+            onClick={() => {
+              navigate(link === "Home" ? "/" : `/${link.toLowerCase()}`);
+              toggleMenu();
+            }}
+            className="text-2xl font-mono text-white hover:text-cyan-500 transition-all duration-300 ease-in-out cursor-pointer"
+          >
+            {link}
+          </div>
+        ))}
+
+        {/* Connect Wallet Button */}
+        {!isWalletConnected && (
+          <ConnectButton
+            client={client}
+            wallets={wallets}
+            className="bg-cyan-500 px-4 py-2 rounded-md text-white font-semibold text-lg hover:bg-cyan-600 transition-all duration-300"
+            onConnect={(wallet) => {
+              setIsWalletConnected(true);
+              toggleMenu();
+            }}
+            onDisconnect={() => {
+              setIsWalletConnected(false);
+              toggleMenu();
+            }}
+          />
+        )}
+      </motion.div>
+    )}
+
     </nav>
   );
 }
