@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { PayEmbed } from "thirdweb/react";
 import { client } from "../client";
+import { FileUploadDemo } from "./UploadFile";
 
 function UserProfile() {
   const [profile, setProfile] = useState({
@@ -15,6 +16,7 @@ function UserProfile() {
 
   const [imagePreview, setImagePreview] = useState(profile.image);
   const [showPayEmbed, setShowPayEmbed] = useState(false);
+  const [showFileUpload, setShowFileUpload] = useState(false);
 
   const handleEditClick = () => {
     setFormData({ ...profile });
@@ -61,6 +63,7 @@ function UserProfile() {
             </div>
           </div>
 
+
         {/* Buy ETH with Fiat Button */}
         <div className="text-center">
           <button
@@ -71,13 +74,17 @@ function UserProfile() {
           </button>
         </div>
 
+
         <div className="text-center">
           <button
             className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
-          >
+            onClick = {() => setShowFileUpload( !showFileUpload)}
+            >
             Claim Insurance
           </button>
         </div>
+
+        {showFileUpload && (<FileUploadDemo />)}
 
         {showPayEmbed && (
           <div className="flex flex-col justify-center items-center  bg-gray-800/80 text-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl mx-auto space-y-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/50 mt-10">
