@@ -1,14 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import MarketPlace from '../components/marketplace'
+import MarketPlace from '../components/MarketPlace'
 
 function MarketPlacePage() {
   return (
     <>
         <Navbar />
         <MarketPlace />
-        <Footer />
     </>
   )
 }

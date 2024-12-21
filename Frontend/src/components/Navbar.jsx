@@ -80,27 +80,8 @@ function Navbar() {
               {link}
             </div>
           ))}
-          <motion.button
-            className="px-6 py-3 text-white border-2 border-cyan-500 rounded-full bg-black hover:bg-cyan-500 transition-all duration-300 ease-in-out"
-            whileHover={{
-              scale: 1.1,
-              backgroundColor: "#00FFFF",
-              boxShadow: "0 0 15px 10px rgba(0, 255, 255, 0.7)",
-            }}
-          >
-            Login
-          </motion.button>
-          <motion.button
-            className="px-6 py-3 text-white border-2 border-cyan-500 rounded-full bg-black hover:bg-cyan-500 transition-all duration-300 ease-in-out"
-            whileHover={{
-              scale: 1.1,
-              backgroundColor: "#00FFFF",
-              boxShadow: "0 0 15px 10px rgba(0, 255, 255, 0.7)",
-            }}
-          >
-            Signup
-          </motion.button>
         </motion.div>
+        
       )}
     </nav>
   );
