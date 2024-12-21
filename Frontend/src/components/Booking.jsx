@@ -18,8 +18,8 @@ const Booking = () => {
                     </h2>
 
                     {/* Search Form */}
-                    <form className="bg-gray-800/80 text-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl mx-auto space-y-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/50">
-                        <div className="flex gap-6">
+                    <form className="bg-gray-800/80 text-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl mx-auto space-y-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/50 hover:bg-opacity-90">
+                        <div className="flex flex-col sm:flex-row gap-6">
                             <div className="flex-1">
                                 <label className="block font-semibold mb-2">From</label>
                                 <input
@@ -37,7 +37,7 @@ const Booking = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex gap-6">
+                        <div className="flex flex-col sm:flex-row gap-6">
                             <div className="flex-1">
                                 <label className="block font-semibold mb-2">Departure</label>
                                 <input
@@ -79,11 +79,11 @@ const Booking = () => {
                     </div>
 
                     {/* Flight Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-16">
                         {[1, 2, 3].map((flight) => (
                             <div
                                 key={flight}
-                                className="bg-gray-800 p-6 rounded-3xl shadow-2xl hover:shadow-purple-500/50 transform hover:scale-110 transition duration-500 relative"
+                                className="bg-gray-800 p-6 rounded-3xl shadow-2xl hover:shadow-purple-500/50 transform hover:scale-105 transition duration-500 relative hover:bg-opacity-90"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-t from-purple-900 via-transparent to-transparent opacity-50"></div>
                                 <h3 className="font-bold text-2xl mb-4 text-teal-400 relative">Flight {flight}</h3>
@@ -97,7 +97,6 @@ const Booking = () => {
                         ))}
                     </div>
                 </main>
-
             </div>
         </>
     );
