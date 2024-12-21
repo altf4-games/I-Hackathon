@@ -12,8 +12,8 @@ const Booking = () => {
                 </div>
 
                 {/* Main Section */}
-                <main className="relative z-10 px-6 pt-28">
-                    <h2 className="text-5xl font-extrabold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-purple-600 animate-fade-in">
+                <main className="relative z-10 px-6 pt-12">
+                    <h2 className="text-5xl font-extrabold mb-8 text-center bg-clip-text animate-fade-in">
                         Discover Boundless Horizons
                     </h2>
 
