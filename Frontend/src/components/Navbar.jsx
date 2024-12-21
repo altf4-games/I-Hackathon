@@ -50,7 +50,7 @@ function Navbar() {
             </div>
           ) : (
             <div className="hidden md:flex space-x-10 items-center">
-              {["How it Works?", "Features", "Traveler Stories", "FAQ"].map((link) => (
+              {["How it Works?", "Features", "Testimonials", "FAQ"].map((link) => (
                 <motion.div
                   key={link}
                   className="relative"
@@ -99,7 +99,7 @@ function Navbar() {
           animate={{ x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {["Home", "How it Works?", "Features", "Traveler Stories", "FAQ"].map((link) => (
+          {["Home", "How it Works?", "Features", "Testimonials", "FAQ"].map((link) => (
             <div
               key={link}
               onClick={() => {

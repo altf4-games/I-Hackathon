@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.120.4",
+    "@react-three/fiber": "^8.17.10",
+    "@tabler/icons-react": "^3.26.0",
     "aos": "^2.3.4",
+    "clsx": "^2.1.1",
     "ethers": "^5.7.2",
     "framer-motion": "^11.15.0",
     "react": "^18.3.1",
@@ -19,7 +23,10 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.0",
     "react-toastify": "^11.0.2",
-    "thirdweb": "^5.80.0"
+    "tailwind-merge": "^2.5.5",
+    "thirdweb": "^5.80.0",
+    "three": "^0.171.0",
+    "three-globe": "^2.37.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
