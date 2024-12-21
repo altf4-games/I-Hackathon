@@ -15,6 +15,7 @@ const wallets = [
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isWalletConnected, setIsWalletConnected] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -48,7 +49,11 @@ function Navbar() {
         </div>
 
         <div className="hidden md:flex space-x-5">
-            <ConnectButton client={client} wallets={wallets} />
+          <ConnectButton client={client} wallets={wallets}
+            onConnect={(wallet) => { 
+                setIsWalletConnected(true);
+             }}
+          />
         </div>
 
         <div
