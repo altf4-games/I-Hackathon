@@ -48,19 +48,19 @@ function UserProfile() {
     <div className="min-h-screen text-white p-6 flex justify-center items-center">
       <div className="w-full max-w-4xl bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl shadow-xl p-8 space-y-6">
         {/* Profile Section */}
-        <div className="flex flex-col sm:flex-row items-center space-y-6 sm:space-y-0 sm:space-x-8">
-          <img
-            src="https://picsum.photos/200"
-            alt="User Profile"
-            className="w-32 h-32 rounded-full border-4 border-blue-500 hover:shadow-xl transition-transform transform hover:scale-110"
-          />
-          <div className="text-center sm:text-left">
-            <h2 className="text-4xl font-bold">{profile.username}</h2>
-            <p className="text-gray-400 mt-2">Wallet: {profile.wallet}</p>
+          <div className="flex flex-col sm:flex-row items-center space-y-6 sm:space-y-0 sm:space-x-8">
+            <img
+              src={profile.image || "https://picsum.photos/200"}
+              alt="User Profile"
+              className="w-32 h-32 rounded-full border-4 border-blue-500 hover:shadow-xl transition-transform transform hover:scale-110"
+            />
+            <div className="text-center sm:text-left">
+              <h2 className="text-4xl font-bold">{profile.username}</h2>
+              <p className="text-gray-400 mt-2">Wallet: {profile.wallet}</p>
+            </div>
           </div>
-        </div>
 
-        {/* Preferences */}
+          {/* Preferences */}
         <div className="space-y-4">
           <h3 className="text-xl font-semibold border-b border-gray-700 pb-2">Preferences</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
