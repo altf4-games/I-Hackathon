@@ -10,6 +10,7 @@ function UserProfile() {
     budget: "$2000 - $5000",
     interests: "Hiking, Photography, Blockchain Events",
     image: "https://via.placeholder.com/100",
+    points: "100"
   });
 
   const [imagePreview, setImagePreview] = useState(profile.image);
@@ -43,8 +44,8 @@ function UserProfile() {
   };
 
   return (
-    <div className="min-h-screen text-white m-6 p-6 grid grid-cols-2 justify-center items-center">
-      <section className="px-4 border-r-4 border-y-white">
+    <div className="min-h-screen text-white m-6 p-6 sm:grid sm:grid-cols-2 flex flex-col justify-center items-center">
+      <section className="px-4 md:border-r-4 md:border-y-white">
       <div className="max-w-full  bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl shadow-xl p-8 space-y-6">
         {/* Profile Section */}
           <div className="flex flex-col items-center space-y-6 sm:space-y-0">
@@ -56,6 +57,7 @@ function UserProfile() {
             <div className="text-center">
               <h2 className="text-4xl font-bold">{profile.username}</h2>
               <p className="text-gray-400 mt-2">Wallet: {profile.wallet}</p>
+              <p className="text-gray-400 font-bold">Loyalty Points: {profile.points}</p>
             </div>
           </div>
 
@@ -66,6 +68,14 @@ function UserProfile() {
             className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
           >
             {showPayEmbed ? "Hide Buy ETH with Fiat" : "Buy ETH with Fiat"}
+          </button>
+        </div>
+
+        <div className="text-center">
+          <button
+            className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
+          >
+            Claim Insurance
           </button>
         </div>
 
@@ -82,14 +92,14 @@ function UserProfile() {
       <section className="grid grid-rows-2 px-4">
         <div className="h-full w-full flex flex-col justify-start items-start">
           <h2 className="text-2xl font-bold w-full">Rewards</h2>
-          <div className="h-24 w-full flex justify-center items-center bg-gray-800 opacity-45 rounded-2xl my-4">
+          <div className="h-36 w-full flex justify-center items-center bg-gray-800 opacity-45 rounded-2xl my-4">
             No Rewards yet!!!
           </div>
 
         </div>
         <div className="h-full w-full flex flex-col justify-start items-start">
         <h2 className="text-2xl font-bold w-full">Purchased Tickets</h2>
-          <div className="h-24 w-full flex justify-center items-center bg-gray-800 opacity-45 rounded-2xl my-4">
+          <div className="h-36 w-full flex justify-center items-center bg-gray-800 opacity-45 rounded-2xl my-4">
             No Purchased tickets yet !!!
           </div>
         </div>
