@@ -1,18 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ethers } from "ethers";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const Community = () => {
   const [newThreadModal, setNewThreadModal] = useState(false);
   const [newThreadTitle, setNewThreadTitle] = useState("");
   const [newThreadText, setNewThreadText] = useState("");
-  const [threads, setThreads] = useState([
-    { id: 1, title: "Thread Title 1", text: "Content of Thread 1", lastActivity: "2h ago" },
-    { id: 2, title: "Thread Title 2", text: "Content of Thread 2", lastActivity: "5h ago" },
-    { id: 3, title: "Thread Title 3", text: "Content of Thread 3", lastActivity: "1d ago" },
-  ]);
-  const [activeThread, setActiveThread] = useState(null); // For opening a thread
-
+  const [threads, setThreads] = useState([]);
+  const [activeThread, setActiveThread] = useState(null); 
+  const contractAddress = "0x79481aE0c1b6d7340b148c5063a072212A073DD1";
+  const abi = [
+    {
+      inputs: [{ internalType: "string", name: "_title", type: "string" }, { internalType: "string", name: "_text", type: "string" }],
+      name: "createThread",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [],
+      name: "getAllThreads",
+      outputs: [
+        {
+          components: [
+            { internalType: "uint256", name: "id", type: "uint256" },
+            { internalType: "address", name: "creator", type: "address" },
+            { internalType: "string", name: "title", type: "string" },
+            { internalType: "string", name: "text", type: "string" },
+            { internalType: "uint256", name: "timestamp", type: "uint256" },
+          ],
+          internalType: "struct CommunityBoard.Thread[]",
+          name: "",
+          type: "tuple[]",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+  ];
+  const provider = new ethers.providers.Web3Provider(window.ethereum) 
+  const signer = provider.getSigner();
+  const contract = new ethers.Contract(contractAddress, abi, signer);
+  useEffect(() => {
+    loadThreads();
+  }, []);
   const notify = (type, message) => {
     switch (type) {
       case "success":
@@ -28,50 +61,61 @@ const Community = () => {
         toast(message);
     }
   };
-
+  const loadThreads = async () => {
+    try {
+      const allThreads = await contract.getAllThreads();
+      const formattedThreads = allThreads.map((thread) => ({
+        id: thread.id.toNumber(),
+        title: thread.title,
+        text: thread.text,
+        lastActivity: new Date(thread.timestamp.toNumber() * 1000).toLocaleString(),
+        creator: thread.creator,
+      }));
+      setThreads(formattedThreads);
+    } catch (error) {
+      console.error("Failed to load threads:", error);
+      notify("error", "Failed to load threads from the blockchain");
+    }
+  };
   const handleNewThread = () => setNewThreadModal(true);
-
-  const handlePostThread = () => {
-    if (newThreadText.trim() && newThreadTitle.trim()) {
-      const newThread = {
-        id: threads.length + 1,
-        title: newThreadTitle,
-        text: newThreadText,
-        lastActivity: "Just now",
-        replies: 0,
-      };
-      setThreads([newThread, ...threads]);
-      notify("success", "Thread created!");
-      setNewThreadTitle("");
-      setNewThreadText("");
-      setNewThreadModal(false);
+  const handlePostThread = async () => {
+    if (newThreadTitle.trim() && newThreadText.trim()) {
+      try {
+        const tx = await contract.createThread(newThreadTitle, newThreadText);
+        await tx.wait();
+        notify("success", "Thread created on the blockchain!");
+        setNewThreadTitle("");
+        setNewThreadText("");
+        setNewThreadModal(false);
+        loadThreads();
+      } catch (error) {
+        console.error("Error creating thread:", error);
+        notify("error", "Failed to create thread");
+      }
     } else {
       notify("error", "Thread title and content cannot be empty");
     }
   };
-
   const handleOpenThread = (thread) => {
     setActiveThread(thread);
   };
-
   const closeModal = () => {
     setNewThreadModal(false);
     setNewThreadTitle("");
     setNewThreadText("");
   };
-
   const closeThreadView = () => {
     setActiveThread(null);
   };
 
   return (
     <div className="mt-24 text-white min-h-screen font-sans">
+      <Navbar />
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="container mx-auto px-4 md:px-8 py-10">
         {!activeThread ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Featured Discussions */}
               <div className="md:col-span-2">
                 <div className="flex items-center justify-between border-b-4 pb-4">
                   <h2 className="text-2xl font-bold pb-2">Featured Discussions</h2>
@@ -96,24 +140,16 @@ const Community = () => {
                           className="w-10 h-10 rounded-full mr-4"
                         />
                         <div>
-                          <h3 className="text-lg font-semibold text-teal-400">
-                            {thread.title}
-                          </h3>
-                          <p className="text-sm text-gray-400">
-                            Last activity: {thread.lastActivity}
-                          </p>
+                          <h3 className="text-lg font-semibold text-teal-400">{thread.title}</h3>
+                          <p className="text-sm text-gray-400">Last activity: {thread.lastActivity}</p>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Trending Topics */}
               <div>
-                <h2 className="text-2xl font-bold mb-4 border-b-4 pb-6">
-                  Trending Topics
-                </h2>
+                <h2 className="text-2xl font-bold mb-4 border-b-4 pb-6">Trending Topics</h2>
                 <ul className="space-y-4">
                   {Array(5)
                     .fill(0)
@@ -149,7 +185,6 @@ const Community = () => {
                         ))}
                     </div>
                 </div>
-       
               </div>
             </div>
           </>
@@ -157,17 +192,12 @@ const Community = () => {
           <div className="p-4 bg-gray-900 rounded-lg shadow-lg">
             <h2 className="text-3xl font-bold mb-4">{activeThread.title}</h2>
             <p className="mb-4 text-gray-400">{activeThread.text}</p>
-            <button
-              className="px-4 py-2 bg-purple-600 rounded-md"
-              onClick={closeThreadView}
-            >
+            <button className="px-4 py-2 bg-purple-600 rounded-md" onClick={closeThreadView}>
               Back to Discussions
             </button>
           </div>
         )}
       </div>
-
-      {/* New Thread Modal */}
       {newThreadModal && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-90 flex justify-center items-center z-50">
           <div className="bg-indigo-900 p-6 rounded-lg shadow-lg w-11/12 md:w-1/2">
@@ -186,24 +216,18 @@ const Community = () => {
               placeholder="What's on your mind?"
             />
             <div className="flex justify-end space-x-4">
-              <button
-                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition-all"
-                onClick={closeModal}
-              >
+              <button className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition-all" onClick={closeModal}>
                 Cancel
               </button>
-              <button
-                className="px-4 py-2 bg-purple-600 rounded-md"
-                onClick={handlePostThread}
-              >
+              <button className="px-4 py-2 bg-purple-600 rounded-md" onClick={handlePostThread}>
                 Post
               </button>
             </div>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };
-
 export default Community;
