@@ -76,16 +76,6 @@ function UserProfile() {
             </div>
           </div>
 
-          {/* Buy ETH with Fiat Button */}
-          <div className="text-center">
-            <button
-              onClick={() => setShowPayEmbed(!showPayEmbed)}
-              className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
-            >
-              {showPayEmbed ? "Hide Buy ETH with Fiat" : "Buy ETH with Fiat"}
-            </button>
-          </div>
-
         {/* Buy ETH with Fiat Button */}
         <div className="text-center">
           <button
@@ -95,15 +85,6 @@ function UserProfile() {
             {showPayEmbed ? "Hide Buy ETH with Fiat" : "Buy ETH with Fiat"}
           </button>
         </div>
-
-
-          <div className="text-center">
-            <button
-              className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
-            >
-              Claim Insurance
-            </button>
-          </div>
         <div className="text-center">
           <button
             className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
