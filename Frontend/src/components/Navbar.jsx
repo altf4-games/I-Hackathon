@@ -72,8 +72,12 @@ function Navbar() {
 
         <div className="hidden md:flex space-x-5">
           <ConnectButton client={client} wallets={wallets}
-            onConnect={(wallet) => { 
-                setIsWalletConnected(true);
+            onConnect={(wallet) => {
+              setIsWalletConnected(true);
+            }}
+            onDisconnect={() => {
+              navigate('/');
+              setIsWalletConnected(false);
              }}
           />
         </div>
