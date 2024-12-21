@@ -9,12 +9,10 @@ import Footer from '../components/Footer'
 function Landing() {
   return (
     <>
-        <Navbar />
         <Hero />
         <HowItWorks />
         <Features />
         <Faqs />
-        <Footer />
     </>
   )
 }

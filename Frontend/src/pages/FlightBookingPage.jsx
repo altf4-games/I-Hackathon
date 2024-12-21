@@ -1,11 +1,8 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 
 const FlightBookingPage = () => {
     return (
         <>
-            <Navbar />
             <div className="min-h-screen text-white font-sans relative py-20 text-center overflow-hidden">
 
                 {/* Floating Interactive Elements */}
@@ -102,7 +99,6 @@ const FlightBookingPage = () => {
                 </main>
 
             </div>
-            <Footer />
         </>
     );
 };

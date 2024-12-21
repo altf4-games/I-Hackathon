@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const Community = () => {
   const [newThreadModal, setNewThreadModal] = useState(false);
@@ -121,7 +119,7 @@ const Community = () => {
 
   return (
     <div className="mt-24 text-white min-h-screen font-sans">
-      <Navbar />
+
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="container mx-auto px-4 md:px-8 py-10">
         {!activeThread ? (
@@ -239,7 +237,6 @@ const Community = () => {
           </div>
         </div>
       )}
-      <Footer />
     </div>
   );
 };

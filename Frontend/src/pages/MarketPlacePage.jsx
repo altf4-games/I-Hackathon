@@ -5,7 +5,6 @@ import MarketPlace from '../components/MarketPlace'
 function MarketPlacePage() {
   return (
     <>
-        <Navbar />
         <MarketPlace />
     </>
   )
