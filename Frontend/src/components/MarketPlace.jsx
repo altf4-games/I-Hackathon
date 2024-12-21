@@ -16,7 +16,7 @@ function MarketPlace() {
   return (
     <div className="min-h-screen h-full w-full flex">
       {/* Profile Card */}
-      <div className="fixed top-16 left-0 max-w-[300px] w-full bg-indigo-900 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl p-8 space-y-6">
+      <div className="hidden md:block fixed top-16 left-0 max-w-[300px] w-full bg-indigo-900 bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-2xl shadow-xl p-8 space-y-6">
         <div className="flex flex-col items-center space-y-6">
           <img
             src="https://picsum.photos/200"
@@ -51,32 +51,23 @@ function MarketPlace() {
       </div>
 
       {/* Rewards Section */}
-      <div className="ml-[320px] w-full flex flex-col items-center mt-24">
-        <div className="flex justify-between w-full px-16">
-          <h1 className="text-6xl text-center font-bold">MarketPlace</h1>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4">Sell Ticket</button>
+      <div className="md:ml-[320px] ml-0 w-full flex flex-col items-center mt-24">
+        <div className="flex flex-col md:flex-row justify-between w-full md:px-16 px-4">
+          <h1 className="lg:text-5xl md:text-4xl text-3xl text-center font-bold">MarketPlace</h1>
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg md:mt-0 mt-4">Sell Ticket</button>
         </div>
-        <div className="mt-8 w-full px-16">
-          <input
-            type="text"
-            placeholder="Search tickets..."
-            className="w-full px-4 py-2 border text-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div className="flex flex-wrap items-start py-12 gap-6 w-full px-16">
+        
+        <div className="flex flex-wrap items-start py-12 gap-6 w-full md:px-16 px-4">
           {MarketPlaceData.map((marketplace, index) => (
             <div
               key={index}
               className="flex w-full bg-gray-900 text-white overflow-hidden rounded-[28px] p-6 shadow-lg"
             >
-              <div className="relative flex justify-between w-full">
-                <div>
+              <div className="relative w-full flex flex-col justify-between">
                   <div className="relative z-10 mb-6 text-2xl font-bold">{marketplace.name}</div>
                   <div className="relative flex gap-2 justify-start items-center z-10 text-lg mb-6"><FaEthereum />{marketplace.price}</div>
                   <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">See details</button>
                 </div>
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Buy Ticket</button>
-              </div>
             </div>
           ))}
         </div>
