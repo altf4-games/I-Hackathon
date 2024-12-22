@@ -37,8 +37,7 @@ export default function Testimonials() {
               <figure>
                 <blockquote className="mt-6 text-lg font-semibold text-white sm:text-xl sm:leading-8">
                   <p>
-                    “Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo expedita voluptas culpa sapiente alias
-                    molestiae. Numquam corrupti in laborum sed rerum et corporis.”
+                  "Traveling has never been this seamless! With this platform, I booked my dream vacation to Bali using cryptocurrency and received an NFT ticket instantly. The eco-friendly options and loyalty rewards were a bonus. Plus, reselling an unused event ticket was effortless on the marketplace. Truly a game-changer for travel enthusiasts!"
                   </p>
                 </blockquote>
                 <figcaption className="mt-6 text-base text-white">

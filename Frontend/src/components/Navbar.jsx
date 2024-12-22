@@ -74,6 +74,7 @@ function Navbar() {
           <ConnectButton client={client} wallets={wallets}
             onConnect={(wallet) => {
               setIsWalletConnected(true);
+              navigate('/booking');
             }}
             onDisconnect={() => {
               navigate('/');
@@ -155,6 +156,7 @@ function Navbar() {
             className="bg-cyan-500 px-4 py-2 rounded-md text-white font-semibold text-lg hover:bg-cyan-600 transition-all duration-300"
             onConnect={(wallet) => {
               setIsWalletConnected(true);
+              navigate("/booking");
               toggleMenu();
             }}
             onDisconnect={() => {

@@ -12,8 +12,7 @@ function Hero() {
           Create <div className='text-cyan-400 text-4xl sm:text-5xl lg:text-8xl'>Experience</div>
         </h1>
         <h1 className='text-3xl sm:text-4xl lg:text-6xl font-bold italic'>with <div className='text-cyan-400 text-4xl sm:text-5xl lg:text-8xl'>Travelling</div></h1>
-        <p className=''></p>
-        <button className="px-3 md:text-2xl text-xl sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-md shadow-lg hover:shadow-xl hover:scale-105 transition-transform mt-2 sm:mt-8">
+        <button className="px-3 md:text-2xl text-xl sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-md shadow-lg hover:shadow-xl hover:scale-105 transition-transform mt-2 sm:mt-8" onClick={() => window.location.href = '#How it Works?'}>
           Get Started
         </button>
       </section>
