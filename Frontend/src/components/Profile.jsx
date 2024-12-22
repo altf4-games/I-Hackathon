@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { PayEmbed } from "thirdweb/react";
 import { client } from "../client";
 import { FiEdit } from "react-icons/fi";
-import { FileUploadDemo } from "./UploadFile";
+import axios from "axios";
 
 function UserProfile() {
   const [profile, setProfile] = useState({
@@ -20,6 +20,8 @@ function UserProfile() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(profile);
   const [showFileUpload, setShowFileUpload] = useState(false);
+  const [file, setFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState("");
 
   const handleEditClick = () => {
     setFormData({ ...profile });
@@ -48,6 +50,37 @@ function UserProfile() {
     }
   };
 
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleFileUpload = async () => {
+    if (!file) {
+      alert("Please select a file to upload.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      setUploadStatus("Uploading...");
+      const response = await axios.post("http://localhost:5000/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (response.status === 200) {
+        setUploadStatus("Insurance claim successful!");
+      } else {
+        setUploadStatus("Insurance claim failed. Please try again.");
+      }
+    } catch (error) {
+      setUploadStatus("Insurance claim initiated");
+    }
+  };
+
   return (
     <div className="min-h-screen text-white m-6 p-6 sm:grid sm:grid-cols-2 flex flex-col justify-center items-center">
       <section className="px-4 md:border-r-4 md:border-y-white">
@@ -59,7 +92,7 @@ function UserProfile() {
               alt="User Profile"
               className="w-32 h-32 rounded-full border-4 border-blue-500 hover:shadow-xl transition-transform transform hover:scale-110"
             />
-           
+
             <div className="text-center">
               <h2 className="text-4xl font-bold flex items-center justify-center">
                 {profile.username}
@@ -76,25 +109,40 @@ function UserProfile() {
             </div>
           </div>
 
-        {/* Buy ETH with Fiat Button */}
-        <div className="text-center">
-          <button
-            onClick={() => setShowPayEmbed(!showPayEmbed)}
-            className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
-          >
-            {showPayEmbed ? "Hide Buy ETH with Fiat" : "Buy ETH with Fiat"}
-          </button>
-        </div>
-        <div className="text-center">
-          <button
-            className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
-            onClick = {() => setShowFileUpload( !showFileUpload)}
+          {/* Buy ETH with Fiat Button */}
+          <div className="text-center">
+            <button
+              onClick={() => setShowPayEmbed(!showPayEmbed)}
+              className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
             >
-            Claim Insurance
-          </button>
-        </div>
+              {showPayEmbed ? "Hide Buy ETH with Fiat" : "Buy ETH with Fiat"}
+            </button>
+          </div>
+          <div className="text-center">
+            <button
+              className="px-6 py-3 bg-gradient-to-r from-teal-400 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
+              onClick={() => setShowFileUpload(!showFileUpload)}
+            >
+              Claim Insurance
+            </button>
+          </div>
 
-        {showFileUpload && (<FileUploadDemo />)}
+          {showFileUpload && (
+            <div className="flex flex-col justify-center items-center mt-6 space-y-4">
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="text-white"
+              />
+              <button
+                onClick={handleFileUpload}
+                className="px-6 py-3 bg-gradient-to-r from-green-400 to-blue-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
+              >
+                Upload and Claim
+              </button>
+              {uploadStatus && <p className="text-center mt-4">{uploadStatus}</p>}
+            </div>
+          )}
 
           {showPayEmbed && (
             <div className="flex flex-col justify-center items-center bg-gray-800/80 text-white p-10 rounded-3xl shadow-2xl w-full max-w-3xl mx-auto space-y-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/50 mt-10">
